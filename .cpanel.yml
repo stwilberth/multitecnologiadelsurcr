@@ -25,3 +25,5 @@ deployment:
     # Finalizar despliegue
     - echo "Deployment completed at $(date)" >> deployment.log
     - echo "---------------------------------------------" >> deployment.log
+
+    
