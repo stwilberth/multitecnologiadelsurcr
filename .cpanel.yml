@@ -2,10 +2,18 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home3/apren173/multitecnologiadelsurcr.com/
     
-    - /bin/cp -R app bootstrap config database lang packages public resources routes artisan composer.json composer.lock package.json vite.config.js $DEPLOYPATH
+    - /bin/cp -R app bootstrap config database lang packages public resources routes storage artisan composer.json composer.lock package.json vite.config.js .env.example $DEPLOYPATH
 
     - cd $DEPLOYPATH
 
+    # Crear directorios de caché y establecer permisos
+    - mkdir -p $DEPLOYPATH/storage/framework/views
+    - mkdir -p $DEPLOYPATH/storage/framework/cache
+    - mkdir -p $DEPLOYPATH/storage/framework/sessions
+    - mkdir -p $DEPLOYPATH/bootstrap/cache
+    - chmod -R 775 $DEPLOYPATH/storage
+    - chmod -R 775 $DEPLOYPATH/bootstrap/cache
+    
     # Limpiar y optimizar Laravel
     - echo "Running Laravel optimizations..." >> deployment.log
     - php artisan config:clear >> deployment.log 2>&1
