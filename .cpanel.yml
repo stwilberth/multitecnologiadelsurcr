@@ -1,0 +1,29 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home3/apren173/multitecnologiadelsurcr.com/
+    
+    # Copiar archivos y directorios necesarios para Bagisto
+    - /bin/cp -R app bootstrap config database public resources routes storage vendor packages artisan composer.json composer.lock package.json vite.config.js .env.example $DEPLOYPATH
+
+    - cd $DEPLOYPATH
+
+    # Asegurar permisos correctos
+    - chmod -R 755 $DEPLOYPATH
+    - chmod -R 775 $DEPLOYPATH/storage $DEPLOYPATH/bootstrap/cache
+    
+    # Limpiar y optimizar Laravel
+    - echo "Running Laravel optimizations..." >> deployment.log
+    - php artisan config:clear >> deployment.log 2>&1
+    - php artisan cache:clear >> deployment.log 2>&1
+    - php artisan route:cache >> deployment.log 2>&1
+    - php artisan config:cache >> deployment.log 2>&1
+    - php artisan view:cache >> deployment.log 2>&1
+    
+    # Comandos específicos de Bagisto
+    - php artisan vendor:publish --all >> deployment.log 2>&1
+    - php artisan migrate --force >> deployment.log 2>&1
+    - php artisan storage:link >> deployment.log 2>&1
+
+    # Finalizar despliegue
+    - echo "Deployment completed at $(date)" >> deployment.log
+    - echo "---------------------------------------------" >> deployment.log
