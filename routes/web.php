@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Livewire\ProductFilter::class);
 
+Route::get('/productos/{slug}', \App\Livewire\ProductShow::class)->name('products.show');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

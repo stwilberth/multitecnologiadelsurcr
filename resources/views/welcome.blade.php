@@ -7,7 +7,11 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
-        <livewire:product-filter />
+    <body class="antialiased">
+        <livewire:layout.navigation />
+        
+        <main>
+            <livewire:product-filter />
+        </main>
     </body>
 </html>

@@ -1,16 +1,4 @@
 <div class="min-h-screen bg-gray-100">
-    <!-- Cabecera -->
-    <header class="bg-[#204E60] shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div class="flex justify-between items-center">
-                <h1 class="text-2xl md:text-3xl font-bold text-white tracking-wide">MULTITECNOLOGÍA DEL SUR</h1>
-                <nav class="hidden md:flex space-x-6">
-                    <a href="#productos" class="text-white hover:text-[#8BC34A] transition-colors duration-300 font-medium">Productos</a>
-                    <a href="#contacto" class="text-white hover:text-[#8BC34A] transition-colors duration-300 font-medium">Contacto</a>
-                </nav>
-            </div>
-        </div>
-    </header>
 
     <!-- Filtros y Productos -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="productos">
@@ -70,7 +58,7 @@
                                 <p class="text-gray-600 text-sm mb-6 leading-relaxed">{{ Str::limit($product->description, 120) }}</p>
                                 <div class="flex justify-between items-center">
                                     <span class="text-[#4CAF50] text-lg font-bold">₡{{ number_format($product->price, 0, '.', ',') }}</span>
-                                    <a href="#" class="bg-[#204E60] text-white px-6 py-2.5 rounded-lg hover:bg-[#1A3A4A] transition-all duration-300 font-medium text-sm shadow-md hover:shadow-lg">
+                                    <a href="/productos/{{ $product->slug }}" class="bg-[#204E60] text-white px-6 py-2.5 rounded-lg hover:bg-[#1A3A4A] transition-all duration-300 font-medium text-sm shadow-md hover:shadow-lg">
                                         Ver Detalles
                                     </a>
                                 </div>
