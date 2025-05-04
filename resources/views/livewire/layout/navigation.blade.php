@@ -32,11 +32,13 @@ new class extends Component
                 <div class="hidden space-x-6 sm:ms-10 sm:flex">
                     <a href="/" class="text-white hover:text-[#8BC34A] transition-colors duration-300 font-medium">Productos</a>
                     <a href="/contacto" class="text-white hover:text-[#8BC34A] transition-colors duration-300 font-medium">Contacto</a>
+                    {{--                     
                     @auth
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white hover:text-[#8BC34A]" wire:navigate>
                             {{ __('Dashboard') }}
                         </x-nav-link>
-                    @endauth
+                    @endauth 
+                    --}}
                 </div>
             </div>
 

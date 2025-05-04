@@ -39,6 +39,11 @@ Route::view('profile', 'profile')
         return 'Cache cleared';
     })->name('admin.clear-cache');
 
-
+    //crear store link
+    Route::get('/admin/create-store-link', function () {
+        $store = \App\Models\Store::find(1);
+        $store->createStoreLink();
+        return 'Store link created';
+    })->name('admin.create-store-link');
 
 require __DIR__.'/auth.php';
