@@ -8,6 +8,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -69,6 +71,31 @@ class ProductResource extends Resource
                 Toggle::make('status')
                     ->label('Activo')
                     ->default(true),
+                Repeater::make('images')
+                    ->relationship()
+                    ->schema([
+                        FileUpload::make('path')
+                            ->image()
+                            ->directory('products')
+                            ->required()
+                            ->label('Imagen')
+                            ->imagePreviewHeight('100')
+                            ->downloadable()
+                            ->reorderable()
+                            ->afterStateUpdated(function ($state, Forms\Set $set) {
+                                if ($state) {
+                                    $set('name', pathinfo($state, PATHINFO_FILENAME));
+                                }
+                            }),
+                        TextInput::make('name')
+                            ->required()
+                            ->label('Nombre de la imagen')
+                            ->helperText('Se generará automáticamente al subir la imagen'),
+                    ])
+                    ->label('Imágenes del Producto')
+                    ->collapsible()
+                    ->reorderable()
+                    ->columnSpanFull(),
             ]);
     }
 
