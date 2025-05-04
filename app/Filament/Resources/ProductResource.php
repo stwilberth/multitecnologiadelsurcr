@@ -44,7 +44,8 @@ class ProductResource extends Resource
                     ->label('URL Amigable'),
                 RichEditor::make('description')
                     ->required()
-                    ->label('Descripción'),
+                    ->label('Descripción')
+                    ->columnSpanFull(),
                 TextInput::make('price')
                     ->required()
                     ->numeric()
@@ -79,22 +80,12 @@ class ProductResource extends Resource
                             ->directory('products')
                             ->required()
                             ->label('Imagen')
-                            ->imagePreviewHeight('100')
-                            ->downloadable()
-                            ->reorderable()
-                            ->afterStateUpdated(function ($state, Forms\Set $set) {
-                                if ($state) {
-                                    $set('name', pathinfo($state, PATHINFO_FILENAME));
-                                }
-                            }),
+                            ->imagePreviewHeight('100'),
                         TextInput::make('name')
                             ->required()
-                            ->label('Nombre de la imagen')
-                            ->helperText('Se generará automáticamente al subir la imagen'),
+                            ->label('Nombre de la imagen'),
                     ])
                     ->label('Imágenes del Producto')
-                    ->collapsible()
-                    ->reorderable()
                     ->columnSpanFull(),
             ]);
     }
