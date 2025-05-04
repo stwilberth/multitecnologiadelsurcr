@@ -7,7 +7,7 @@
                     <div class="relative w-full h-full">
                         @foreach($product->images as $index => $image)
                             <div x-show="activeSlide === {{ $index }}" class="absolute inset-0 w-full h-full transition-opacity duration-300" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
-                                <img src="{{ asset('storage/' . $image->url) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                                <img src="{{ asset('storage/' . $image->path) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
                             </div>
                         @endforeach
 

@@ -11,7 +11,7 @@ class ProductShow extends Component
 
     public function mount($slug)
     {
-        $this->product = Product::where('slug', $slug)
+        $this->product = Product::where('slug', $slug)->with('images')
             ->where('status', true)
             ->firstOrFail();
     }
