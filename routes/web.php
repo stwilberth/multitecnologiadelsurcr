@@ -30,4 +30,15 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+    //routs for the admin panel clear cache
+    Route::get('/admin/clear-cache', function () {
+        \Artisan::call('cache:clear');
+        \Artisan::call('config:cache');
+        \Artisan::call('view:clear');
+        \Artisan::call('route:clear');
+        return 'Cache cleared';
+    })->name('admin.clear-cache');
+
+
+
 require __DIR__.'/auth.php';
