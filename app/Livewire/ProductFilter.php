@@ -47,7 +47,7 @@ class ProductFilter extends Component
 
     public function render()
     {
-        $productsQuery = Product::query()->where('status', true);
+        $productsQuery = Product::query()->where('status', true)->with('images');
 
         if ($this->category) {
             $productsQuery->where('category_id', $this->category);

@@ -46,8 +46,8 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     @forelse($products as $product)
                         <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                            @if($product->image)
-                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" 
+                            @if($product->images->count() > 0)
+                                <img src="{{ asset('storage/' . $product->images->first()->path) }}" alt="{{ $product->name }}" 
                                      class="w-full h-56 object-cover hover:scale-105 transition-transform duration-300">
                             @else
                                 <div class="w-full h-56 bg-gray-100 flex items-center justify-center">
