@@ -1,13 +1,40 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="bg-white rounded-lg shadow-lg p-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Imagen del producto (placeholder por ahora) -->
-            <div class="aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden">
-                <div class="w-full h-full flex items-center justify-center text-gray-500">
-                    <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                </div>
+            <!-- Carrusel de imágenes del producto -->
+            <div x-data="{ activeSlide: 0, totalSlides: {{ $product->images->count() }} }" class="aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden relative">
+                @if($product->images->count() > 0)
+                    <div class="relative w-full h-full">
+                        @foreach($product->images as $index => $image)
+                            <div x-show="activeSlide === {{ $index }}" class="absolute inset-0 w-full h-full transition-opacity duration-300" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                                <img src="{{ asset('storage/' . $image->url) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                            </div>
+                        @endforeach
+
+                        <!-- Controles de navegación -->
+                        @if($product->images->count() > 1)
+                            <button @click="activeSlide = (activeSlide - 1 + totalSlides) % totalSlides" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/75 focus:outline-none">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                            </button>
+                            <button @click="activeSlide = (activeSlide + 1) % totalSlides" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/75 focus:outline-none">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </button>
+
+                            <!-- Indicadores -->
+                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                                @foreach($product->images as $index => $image)
+                                    <button @click="activeSlide = {{ $index }}" class="w-2 h-2 rounded-full transition-all duration-300" :class="activeSlide === {{ $index }} ? 'bg-white' : 'bg-white/50'"></button>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                @else
+                    <div class="w-full h-full flex items-center justify-center text-gray-500">
+                        <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                @endif
             </div>
 
             <!-- Información del producto -->
@@ -45,7 +72,7 @@
                 </div>
 
                 <div class="border-t border-gray-200 pt-4">
-                    <a href="https://wa.me/+50688888888?text=Hola, estoy interesado en el producto: {{ $product->name }}" 
+                    <a href="https://wa.me/50663938400?text=Hola, estoy interesado en el producto: {{ $product->name }}" 
                         target="_blank"
                         class="w-full bg-green-600 text-white px-6 py-3 rounded-md font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 flex items-center justify-center">
                         <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

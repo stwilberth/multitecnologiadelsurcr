@@ -40,10 +40,10 @@ Route::view('profile', 'profile')
     })->name('admin.clear-cache');
 
     //crear storage link
-    Route::get('/storage-link', function () {
+    /*     Route::get('/storage-link', function () {
        //artisan storage:link
         \Artisan::call('storage:link');
         return 'Storage link created';
-    })->name('storage-link');
+    })->name('storage-link'); */
 
 require __DIR__.'/auth.php';
