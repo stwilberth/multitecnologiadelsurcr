@@ -16,7 +16,7 @@ new class extends Component
     }
 }; ?>
 
-<nav x-data="{ open: false }" class="bg-[#204E60] shadow-lg sticky top-0 z-50">
+<nav x-data="{ open: false }" class="bg-[#204E60] shadow-lg sticky top-0 z-50 p-2">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -24,15 +24,14 @@ new class extends Component
                 <!-- Logo y Título -->
                 <div class="shrink-0 flex items-center">
                     <a href="/" class="flex items-center">
-                        <x-application-logo class="block h-9 w-auto fill-current text-white" />
                         <span class="text-2xl font-bold text-white ml-2">MULTITECNOLOGÍA DEL SUR</span>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-6 sm:ms-10 sm:flex">
-                    <a href="#productos" class="text-white hover:text-[#8BC34A] transition-colors duration-300 font-medium">Productos</a>
-                    <a href="#contacto" class="text-white hover:text-[#8BC34A] transition-colors duration-300 font-medium">Contacto</a>
+                    <a href="/" class="text-white hover:text-[#8BC34A] transition-colors duration-300 font-medium">Productos</a>
+                    <a href="/contacto" class="text-white hover:text-[#8BC34A] transition-colors duration-300 font-medium">Contacto</a>
                     @auth
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white hover:text-[#8BC34A]" wire:navigate>
                             {{ __('Dashboard') }}
@@ -42,6 +41,7 @@ new class extends Component
             </div>
 
             <!-- Settings Dropdown -->
+            {{--             
             @auth
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
                     <x-dropdown align="right" width="48">
@@ -76,7 +76,7 @@ new class extends Component
                     <a href="{{ route('login') }}" class="text-white hover:text-[#8BC34A] transition-colors duration-300 font-medium">Iniciar Sesión</a>
                     <a href="{{ route('register') }}" class="text-white hover:text-[#8BC34A] transition-colors duration-300 font-medium">Registrarse</a>
                 </div>
-            @endauth
+            @endauth --}}
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
@@ -93,13 +93,15 @@ new class extends Component
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-[#204E60] border-t border-[#8BC34A]/20">
         <div class="pt-2 pb-3 space-y-1">
-            <a href="#productos" class="block px-4 py-2 text-white hover:text-[#8BC34A] transition-colors duration-300">Productos</a>
-            <a href="#contacto" class="block px-4 py-2 text-white hover:text-[#8BC34A] transition-colors duration-300">Contacto</a>
+            <a href="/" class="block px-4 py-2 text-white hover:text-[#8BC34A] transition-colors duration-300">Productos</a>
+            <a href="/contacto" class="block px-4 py-2 text-white hover:text-[#8BC34A] transition-colors duration-300">Contacto</a>
+            {{--            
             @auth
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white hover:text-[#8BC34A]" wire:navigate>
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
-            @endauth
+            @endauth 
+            --}}
         </div>
 
         @auth
@@ -111,6 +113,7 @@ new class extends Component
                 </div>
 
                 <div class="mt-3 space-y-1">
+                    {{-- 
                     <x-responsive-nav-link :href="route('profile')" class="text-white hover:text-[#8BC34A]" wire:navigate>
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
@@ -120,15 +123,16 @@ new class extends Component
                         <x-responsive-nav-link class="text-white hover:text-[#8BC34A]">
                             {{ __('Log Out') }}
                         </x-responsive-nav-link>
-                    </button>
+                    </button> --}}
                 </div>
             </div>
         @else
             <div class="pt-4 pb-1 border-t border-[#8BC34A]/20">
-                <div class="space-y-1">
+                <div class="space-y-1">{{-- 
                     <a href="{{ route('login') }}" class="block px-4 py-2 text-white hover:text-[#8BC34A] transition-colors duration-300">Iniciar Sesión</a>
                     <a href="{{ route('register') }}" class="block px-4 py-2 text-white hover:text-[#8BC34A] transition-colors duration-300">Registrarse</a>
-                </div>
+                    --}}
+                </div> 
             </div>
         @endauth
     </div>

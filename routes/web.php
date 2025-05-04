@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', \App\Livewire\ProductFilter::class);
+Route::view('/', 'welcome')->name('home');
+
+//contact
+Route::view('contacto', 'contact')->name('contact');
+//about
+//Route::view('nosotros', 'about')->name('about');
 
 Route::get('/productos/{slug}', \App\Livewire\ProductShow::class)->name('products.show');
 
