@@ -2,28 +2,28 @@
     <div class="bg-white rounded-lg shadow-lg p-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Carrusel de imágenes del producto -->
-            <div x-data="{ activeSlide: 0, totalSlides: {{ $product->images->count() }} }" class="aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden relative">
+            <div x-data="{ activeSlide: 0, totalSlides: {{ $product->images->count() }} }" class="aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden relative h-[300px] sm:h-[400px] md:h-[450px]">
                 @if($product->images->count() > 0)
                     <div class="relative w-full h-full">
                         @foreach($product->images as $index => $image)
                             <div x-show="activeSlide === {{ $index }}" class="absolute inset-0 w-full h-full transition-opacity duration-300" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
-                                <img src="{{ asset('storage/' . $image->path) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                                <img src="{{ asset('storage/' . $image->path) }}" alt="{{ $product->name }}" class="w-full h-full object-contain sm:object-cover">
                             </div>
                         @endforeach
 
                         <!-- Controles de navegación -->
                         @if($product->images->count() > 1)
-                            <button @click="activeSlide = (activeSlide - 1 + totalSlides) % totalSlides" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/75 focus:outline-none">
+                            <button @click="activeSlide = (activeSlide - 1 + totalSlides) % totalSlides" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white p-3 rounded-full hover:bg-indigo-700 focus:outline-none shadow-lg z-10 transition-all duration-300 hover:scale-110">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                             </button>
-                            <button @click="activeSlide = (activeSlide + 1) % totalSlides" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/75 focus:outline-none">
+                            <button @click="activeSlide = (activeSlide + 1) % totalSlides" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white p-3 rounded-full hover:bg-indigo-700 focus:outline-none shadow-lg z-10 transition-all duration-300 hover:scale-110">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                             </button>
 
                             <!-- Indicadores -->
-                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
                                 @foreach($product->images as $index => $image)
-                                    <button @click="activeSlide = {{ $index }}" class="w-2 h-2 rounded-full transition-all duration-300" :class="activeSlide === {{ $index }} ? 'bg-white' : 'bg-white/50'"></button>
+                                    <button @click="activeSlide = {{ $index }}" class="w-3 h-3 rounded-full transition-all duration-300 shadow-md" :class="activeSlide === {{ $index }} ? 'bg-indigo-600 scale-125' : 'bg-white hover:bg-indigo-200'"></button>
                                 @endforeach
                             </div>
                         @endif
