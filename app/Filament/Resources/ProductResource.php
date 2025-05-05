@@ -11,6 +11,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -31,7 +32,7 @@ class ProductResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->live(onBlur: true)
-                    ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
+                    ->afterStateUpdated(function (string $operation, $state, Set $set) {
                         if ($operation === 'create') {
                             $set('slug', Str::slug($state));
                             $set('meta_title', $state);
